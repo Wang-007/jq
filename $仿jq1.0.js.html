@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		div {
+			width: 100px;
+			height: 100px;
+			margin: 10px;
+			background-color: pink;
+		}
+		span {
+			display: block;
+			width: 150px;
+			height: 150px;
+			background-color: yellow;
+		}
+	</style>
+</head>
+<body>
+	<div class="test"></div>
+	<span></span>
+	<div></div>
+	<div></div>
+	<div class="demo test"></div>
+	<div></div>
+	<div></div>
+	<div class="ab cd demo"></div>
+	<div id="one"></div>
+	<div class="one"></div>
+	<div></div>
+	<span></span>
+</body>
+</html>
+<script type="text/javascript">
+	function getClass(classname) {
+		if (document.getElementsByClassName) {
+			return document.getElementsByClassName(classname);
+		}
+		var arr = [];
+		var dom = document.getElementsByTagName('*');
+		for (var i = 0, len = dom.length; i < len; i++) {
+			var txt = dom[i].classname.split(' ');
+			for (var j = 0, leg = txt.length; j < leg; j++) {
+				if (txt[j] == classname) {
+					arr.push(dom[i]);
+				}
+			}
+		}
+		return arr;
+	}
+
+	function $(str) {
+		var s = str.charAt(0);
+		var ss = str.substr(1);
+		switch (s) {
+			case '#':
+				return document.getElementById(ss);
+				break;
+			case '.':
+				return getClass(ss);
+				break;
+			default:
+				return document.getElementsByTagName(str);
+				break;
+		}
+	}
+	$('#one').style.backgroundColor = 'purple';
+	var test = $('.test');
+	for (var i = 0, len = test.length; i < len; i++) {
+		test[i].style.backgroundColor = 'red';
+	}
+	var spans = $('span');
+	for (var i = 0, len = spans.length; i < len; i++) {
+		spans[i].style.backgroundColor = 'green';
+	}
+</script>
